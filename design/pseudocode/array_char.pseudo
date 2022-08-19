@@ -1,0 +1,24 @@
+procedure array_char_init <array>:
+  Inicializar campos de la estructura
+end procedure
+
+procedure array_char_destroy <array>:
+  Liberar la memoria utilizada por la estructura
+end procedure
+
+procedure array_char_add <array> <element>:
+  Guardar el elemento en el arreglo, aumentar capacidad en caso de ser insuficiente
+end procedure
+
+procedure more_capacity <array>:
+  Aumentar capacidad de la estructura
+  Copiar los elementos del antiguo arreglo en el nuevo
+end procedure
+
+procedure array_char_get_elements <array>:
+  Retornar campo elements de array
+end procedure
+
+procedure array_char_get_count <array>:
+  Retornar campo count de array
+end procedure

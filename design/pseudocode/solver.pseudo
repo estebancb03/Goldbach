@@ -1,0 +1,19 @@
+procedure solver_create:
+  Crear e inicializar campos de la estructura
+end procedure
+
+procedure solver_read <solver>:
+  Craer goldbach y agregarlo al arreglo para cada valor introducido
+end procedure
+
+procedure solver_run <solver>:
+  Calcular las Sumas de Goldbach para cada valor del arreglo
+end procedure
+
+procedure solver_print <solver>:
+  Imprimir las Sumas de Goldbach para cada valor del arreglo
+end procedure
+
+procedure solver_destroy <solver>:
+  Liberar memoria empleada por la estructura
+end procedure

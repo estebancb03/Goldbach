@@ -1,0 +1,66 @@
+procedure goldbach_create <entry>:
+  Crear e inicializar campos de la estructura
+  Hacer validaciones generales
+end procedure
+
+procedure goldbach_run <goldbach>:
+  Si la entrada es válida calcular los números primos y Sumas de Goldbach
+end procedure
+
+procedure goldbach_print <goldbach>:
+  Imprimir las Sumas de Goldbach con el formato indicado según validaciones
+end procedure
+
+procedure goldbach_destroy <goldbach>:
+  Liberar memoria empleada por la estructura
+end procedure
+
+procedure validate_value <entry>:
+  Recorrer cada campo de la entrada verificando que no existan dígitos inválidos
+end entry
+
+procedure validate_is_negative <entry>:
+  Averiguar si la entrada es negtiva o no
+end procedure
+
+procedure validate_value_is_even_number <entry>:
+  Averiguar si la entrada es un número par o impar
+end procedure
+
+procedure validate_is_prime <number>:
+  Averiguar si el número es primo o no
+end procedure
+
+procedure validate_strong_sum <sums> <number1> <number2>:
+  Recorrer el arreglo de sumas validando que number1 y number2 no estén juntos en el arreglo
+end procedure
+
+procedure validate_weak_sum <sums> <number1> <number2> <number3>:
+  Recorrer el arreglo de sumas validando que number1, number2 y number3 no estén juntos en el arreglo
+end procedure
+
+procedure extract_value <entry>:
+  Convertir entry a entero de 32 bits positivo
+end procedure
+
+procedure generate_prime_numbers <number>:
+  Generar números primos desde 2 hasta number y guardarlos en el arreglo
+end procedure
+
+procedure generate_sums <number> <even_number> <prime_numbers>:
+  Si even_number es true retornar generate_strong_sums si no retornar generate_weak_sums
+end procedure
+
+procedure generate_strong_sums <number> <prime_numbers>:
+  Generar combinaciones de números
+  Si la suma de los números actuales de las repeticiones son iguales al valor y su suma es válida agregar números de recorridos a sums
+end procedure
+
+procedure generate_strong_sums <number> <prime_numbers>:
+  Generar combinaciones de números
+  Si la suma de los números actuales de las repeticiones son iguales al valor y su suma es válida agregar números de recorridos a sums
+end procedure
+
+procedure generate_count <even_number> <sums>:
+  Averiguar la cantidad de sumas encontradas
+end procedure
