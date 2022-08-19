@@ -17,8 +17,6 @@ end procedure
 
 procedure create_threads <solver>:
   Inicializar arreglo de hilos y estructura de datos privados
-  Calcular la distribución del trabajo entre los hilos
-  Delimitar el rango sobre el arreglo en el que un hilo trabaja
   Crear los hilos y asignarles su trabajo a hacer
   Hacer join a todos los hilos
   Imprimir las Sumas de Goldbach
@@ -29,6 +27,6 @@ procedure join_threads <threads, thread_count>:
   Hacer join a cada hilo del arreglo de hilos
 end procedure
 
-procedure join_threads <threads, thread_count>:
-  Calcular las Sumas de Goldbach para cada valor del arreglo
+procedure calculate <data>:
+  Calcular las Sumas de Goldbach para cada valor del arreglo asignandose mediante mapeo dinámico
 end procedure

@@ -1,7 +1,7 @@
 # **Diseño de estructuras de datos**
 
-![Diagrama UML](goldbach_structures.svg "Diagrama UML")
-![Diagrama explicativo](explanatory_diagram.svg "Diagrama explicativo")
+![Diagrama UML](../images/goldbachStructures.png "Diagrama UML")
+![Diagrama explicativo](../images/memoryDiagram.png "Diagrama de memoria")
 
 ## Array_char
 
@@ -73,17 +73,22 @@ Para recorrer cada archivo introducido y calcular las Sumas de Goldbach para tod
 
 ```C
 typedef struct solver {
+  uint32_t position;
   uint32_t thread_count;
-  array_goldbach_t array;
+  array_goldbach_t buffer;
+  pthread_mutex_t can_access_position;
 } solver_t
 
 typedef struct private_data {
-  uint32_t start;
-  uint32_t finish;
   solver_t* solver;
 } private_data_t;
 ```
 
-La estructura ```solver``` se encarga de almacenar los datos compartidos entre los diferentes hilos, posee los campos ```thread_count``` que guarda la cantidad de hilos a crear para resolver las operaciones y ```array``` que almacena los objetos goldbach_t* correspondientes a cada valor, esta se crea en el constructor. El método constructor no requiere parámetros.
+La estructura ```solver``` se encarga de almacenar los datos compartidos entre los diferentes hilos, posee los campos ```position``` que es la variable contadora para la reparticion de celdas del arreglo entre los hilos, ```thread_count``` que guarda la cantidad de hilos a crear para resolver las operaciones, ```buffer``` que almacena los objetos goldbach_t* correspondientes a cada valor y ```can_access_position``` que es un mutex que controla la lectura y modificación del campo position. El método constructor no requiere parámetros.
 
-Por último, la estructura ```private_data``` contiene la información exclusiva para cada hilo, entre sus campos se encuentran ```start``` y ```finish``` que delimitan la región del arreglo en la que puede operar el hilo, tambien tiene un puntero que apunta a los datos compartidos que sería ```solver```.
+Por último, la estructura ```private_data``` contiene la información exclusiva para cada hilo, tiene como único campo un puntero que apunta a los datos compartidos que sería ```solver```.
+
+## Navegación
+
+* [README principal](../README.md)
+* [README de reporte](../report/README.md)

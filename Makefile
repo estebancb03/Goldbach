@@ -120,6 +120,9 @@ memcheck: $(EXEFILE)
 helgrind:
 	valgrind --quiet --tool=helgrind $(EXEARGS)
 
+callgrind: $(EXEFILE)
+	valgrind --tool=callgrind --separate-threads=yes $(EXEARGS)
+
 clean:
 	rm -rf $(IGNORES)
 

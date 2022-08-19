@@ -31,14 +31,6 @@ procedure validate_is_prime <number>:
   Averiguar si el número es primo o no
 end procedure
 
-procedure validate_strong_sum <sums> <number1> <number2>:
-  Recorrer el arreglo de sumas validando que number1 y number2 no estén juntos en el arreglo
-end procedure
-
-procedure validate_weak_sum <sums> <number1> <number2> <number3>:
-  Recorrer el arreglo de sumas validando que number1, number2 y number3 no estén juntos en el arreglo
-end procedure
-
 procedure extract_value <entry>:
   Convertir entry a entero de 32 bits positivo
 end procedure
@@ -53,12 +45,12 @@ end procedure
 
 procedure generate_strong_sums <number> <prime_numbers>:
   Generar combinaciones de números
-  Si la suma de los números actuales de las repeticiones son iguales al valor y su suma es válida agregar números de recorridos a sums
+  Si la suma de los números actuales de las repeticiones son iguales al valor agregar números de recorridos a sums
 end procedure
 
 procedure generate_strong_sums <number> <prime_numbers>:
   Generar combinaciones de números
-  Si la suma de los números actuales de las repeticiones son iguales al valor y su suma es válida agregar números de recorridos a sums
+  Si la suma de los números actuales de las repeticiones son iguales al valor yagregar números de recorridos a sums
 end procedure
 
 procedure generate_count <even_number> <sums>:

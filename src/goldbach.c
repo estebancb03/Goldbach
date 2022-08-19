@@ -67,45 +67,6 @@ bool validate_even_number(char* entry);
 bool validate_is_prime(uint32_t number);
 
 /**
- * @brief Valida que una suma de conjetura fuerte no exista en sums
- * @details Revisa que dos números no estén juntos en el arreglo porque si esto sucediera
- *          significa que se repite una respuesta. Lo que se intenta evitar es que en el
- *          arreglo de soluciones exista algo tipo [5, 7, 7, 5] ya que 5 + 7 y 7 + 5 es
- *          la misma suma.
- * @code
- *   bool validate = validate_strong_sum(array, 5, 7);
- * @endcode
- * @param sums arreglo de soluciones
- * @param number1 primer número
- * @param number2 segundo número 
- * @return 
- *   true: si la pareja de números no está en sums
- *   false: si la pareja de números está en sums
- */
-bool validate_strong_sum(array_uint32_t sums, uint32_t number1,
-                         uint32_t number2);
-
-/**
- * @brief Valida que una suma de conjetura débil no exista en sums
- * @details Revisa que tres números no estén juntos en el arreglo porque si esto sucediera
- *          significa que se repite una respuesta. Lo que se intenta evitar es que en el
- *          arreglo de soluciones exista algo tipo [5, 5, 7, 7, 5 , 5, 5, 7, 5] ya que
- *          5 + 5 + 7, 7 + 5 + 5 y 5 + 7 + 5 es la misma suma
- * @code
- *   bool validate = validate_weak_sum(array, 5, 5, 7);
- * @endcode
- * @param sums arreglo de soluciones 
- * @param number1 primer número 
- * @param number2 segundo número 
- * @param number3 tercer número 
- * @return
- *   true: si el trio de números no está en sums
- *   false: si el trio de números está en sums
- */
-bool validate_weak_sum(array_uint32_t sums, uint32_t number1, uint32_t number2,
-                       uint32_t number3);
-
-/**
  * @brief Extrae el valor proporcionado en la enterada
  * @details Convierte la entrada que es char* a uint32_t si es un valor válido para que 
  *          pueda ser usado en posteriores calculos con mayor facilidad.
@@ -307,70 +268,15 @@ bool validate_even_number(char* entry) {
 }
 
 bool validate_is_prime(uint32_t number) {
-  bool answer = true;
-  if (number > 1) {
-    // Averiguar si el número es primo o no
-    for (uint32_t index = 2; index <= number / 2; ++index) {
-      if (number % index == 0)
-        answer = false;
-    }
-  } else {
-    answer = false;
+  if (number == 2 || number == 3)
+    return true;
+  if (number %2 == 0 || number %3 == 0)
+    return false;
+  for (uint32_t index = 5; index * index <= number; index += 6) {
+    if (number %index == 0 || number %(index+2) == 0)
+      return false;
   }
-  return answer;
-}
-
-bool validate_strong_sum(array_uint32_t sums, uint32_t number1,
-                         uint32_t number2) {
-  bool answer = true;
-  uint32_t sums_count = array_uint32_get_count(&sums);
-  uint32_t* sums_elements = array_uint32_get_elements(&sums);
-  /* Recorrer el arreglo de sumas validando que number1 y number2 no estén 
-     juntos en el arreglo */
-  for (uint32_t index = 1; index < sums_count && answer; ++index) {
-    if (sums_elements[index - 1] == number1 && sums_elements[index] == number2)
-      answer = false;
-    else if (sums_elements[index - 1] == number2 &&
-             sums_elements[index] == number1)
-      answer = false;
-  }
-  return answer;
-}
-
-bool validate_weak_sum(array_uint32_t sums, uint32_t number1, uint32_t number2,
-                       uint32_t number3) {
-  bool answer = true;
-  uint32_t sums_count = array_uint32_get_count(&sums);
-  uint32_t* sums_elements = array_uint32_get_elements(&sums);
-  /* Recorrer el arreglo de sumas validando que number1, number2 y number3 no
-     estén juntos en el arreglo */
-  for (uint32_t index = 2; index < sums_count && answer; ++index) {
-    if (sums_elements[index - 2] == number1 &&
-        sums_elements[index - 1] == number2 &&
-        sums_elements[index] == number3)
-      answer = false;
-    else if (sums_elements[index - 2] == number1 &&
-             sums_elements[index - 1] == number3 &&
-             sums_elements[index] == number2)
-      answer = false;
-    else if (sums_elements[index - 2] == number2 &&
-             sums_elements[index - 1] == number1 &&
-             sums_elements[index] == number3)
-      answer = false;
-    else if (sums_elements[index - 2] == number2 &&
-             sums_elements[index - 1] == number3 &&
-             sums_elements[index] == number1)
-      answer = false;
-    else if (sums_elements[index - 2] == number3 &&
-             sums_elements[index - 1] == number1 &&
-             sums_elements[index] == number2)
-      answer = false;
-    else if (sums_elements[index - 2] == number3 &&
-             sums_elements[index - 1] == number2 &&
-             sums_elements[index] == number1)
-      answer = false;
-  }
-  return answer;
+  return true;
 }
 
 uint32_t extract_value(char* entry) {
@@ -406,17 +312,18 @@ array_uint32_t generate_strong_sums(uint32_t number,
                                     array_uint32_t prime_numbers) {
   array_uint32_t sums;
   array_uint32_init(&sums);
+  uint32_t index_number = 0;
+  uint32_t jindex_number = 0;
   uint32_t prime_numbers_count = array_uint32_get_count(&prime_numbers);
   uint32_t* prime_numbers_elements = array_uint32_get_elements(&prime_numbers);
   // Generar combinaciones de números
   for (uint32_t index = 0; index < prime_numbers_count; ++index) {
-    uint32_t index_number = prime_numbers_elements[index];
-    for (uint32_t jindex = 0; jindex < prime_numbers_count; ++jindex) {
-      uint32_t jindex_number = prime_numbers_elements[jindex];
+    index_number = prime_numbers_elements[index];
+    for (uint32_t jindex = index; jindex < prime_numbers_count; ++jindex) {
+      jindex_number = prime_numbers_elements[jindex];
       /* Si la suma de los números actuales de las repeticiones son iguales al
          valor y su suma es válida agregar números de recorridos a sums */
-      if (index_number + jindex_number == number &&
-          validate_strong_sum(sums, index_number, jindex_number)) {
+      if (index_number + jindex_number == number) {
         array_uint32_add(&sums, index_number);
         array_uint32_add(&sums, jindex_number);
       }
@@ -429,19 +336,21 @@ array_uint32_t generate_weak_sums(uint32_t number,
                                   array_uint32_t prime_numbers) {
   array_uint32_t sums;
   array_uint32_init(&sums);
+  uint32_t index_number = 0;
+  uint32_t jindex_number = 0;
+  uint32_t kindex_number = 0;
   uint32_t prime_numbers_count = array_uint32_get_count(&prime_numbers);
   uint32_t* prime_numbers_elements = array_uint32_get_elements(&prime_numbers);
   // Generar combinaciones de números
   for (uint32_t index = 0; index < prime_numbers_count; ++index) {
-    uint32_t index_number = prime_numbers_elements[index];
-    for (uint32_t jindex = 0; jindex < prime_numbers_count; ++jindex) {
-      uint32_t jindex_number = prime_numbers_elements[jindex];
-      for (uint32_t kindex = 0; kindex < prime_numbers_count; ++kindex) {
-        uint32_t kindex_number = prime_numbers_elements[kindex];
+    index_number = prime_numbers_elements[index];
+    for (uint32_t jindex = index; jindex < prime_numbers_count; ++jindex) {
+      jindex_number = prime_numbers_elements[jindex];
+      for (uint32_t kindex = jindex; kindex < prime_numbers_count; ++kindex) {
+        kindex_number = prime_numbers_elements[kindex];
         /* Si la suma de los números actuales de las repeticiones son iguales al
            valor y su suma es válida agregar números de recorridos a sums */
-        if (index_number + jindex_number + kindex_number == number &&
-        validate_weak_sum(sums, index_number, jindex_number, kindex_number)) {
+        if (index_number + jindex_number + kindex_number == number) {
           array_uint32_add(&sums, index_number);
           array_uint32_add(&sums, jindex_number);
           array_uint32_add(&sums, kindex_number);
