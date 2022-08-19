@@ -77,7 +77,7 @@ Es evidente que el mayor incremento en la velocidad y la eficiencia del programa
 
 En este grafico se puede apreciar la importante caída en la duración de ejecución del programa con la tarea #2 que fue donde se implementó la versión concurrente y en la optimización #2 en la que se modificó el ineficiente algoritmo de cálculo y en donde se vió el mayor aumento de velocidad con respecto a la versión serial.
 
-![Gráfico de Comparación #2: optimización](../images/optimizationGraph2.png)
+![Gráfico de Comparación #2: Optimización](../images/optimizationGraph2.png)
 
 Del anterior gráfico se puede concluir que la eficiencia crece en la misma medida que se da los aumentos de velocidad.
 
@@ -97,6 +97,23 @@ Esta información se puede observar más claramente en el siguiente gráfico:
 ![Gráfico de Comparación #2: Concurrencia](../images/concurrencyGraph.png)
 
 Como se puede apreciar en el gráfico el mayor incremento de velocidad se da cuando se trabaja con la cantidad de hilos equivalentes a CPU disponibles, a partir de ahí utilizar más hilos no dará más aumentos de velocidad y por el contrario vuleve menos eficiente el programa sin tener beneficios. Por otro lado, se observa que la versión más cercana al punto de equilibrio entre incremento de velocidad y eficiencia es cuando se utilizan la cantidad de hilos equivalente a la mitad de CPU existentes. ```El punto de óptimo de incremento de velocidad - eficiencia se encuentra al emplear la cantidad de hilos equivalente a un tercio de CPU disponibles```, que para el equipo donde se hicieron las pruebas serían cuatro hilos. [Hoja de cálculo](perfMeasure.xlsx).
+
+## Comparación #3: OpenMP
+
+A continuación se presenta una tabla con los distintos datos recabados de ```goldbach_pthread``` y ```OpenMP``` para hacer un contraste entre estas versiones y ver la evolución de la velocidad y eficiencia en cada etapa. Se empleó el caso de prueba [input020.txt](../test/input020.txt) para tomar los datos.
+
+|                  | goldbach_pthread | OpenMP           |
+|------------------|------------------|------------------|
+|Hilos             | 12               | 12               |
+|Tiempo            | 22823.12         | 359.57           |
+|Velocidad         | 3.01             | 190.87           |
+|Eficiencia        | 0.25             | 15.91            |
+
+Esta información se puede observar más claramente en el siguiente gráfico:
+
+![Gráfico de Comparación #3: OpenMP](../images/openMPGraph.png)
+
+La gran diferencia en velocidad y eficiencia que muestra el gráfico es gracias a las optimizaciones realizadas en la tarea #3 ya que el rendimiento entre esta versión y la versión que utiliza OpenMP es practicamente la misma. Con respecto a la versión de la Tarea #2 esta es basatnte lenta debido a que no está optimizada y por ende tiene una grandiferencia de rendimiento con la versión de OpenMP.
 
 ## Navegación
 

@@ -7,26 +7,16 @@ procedure solver_read <solver>:
   Craer goldbach y agregarlo al arreglo para cada valor introducido
 end procedure
 
+procedure solver_run <solver>:
+  Invocación a solver_read()
+  Calcular las sumas de Goldbach para todos los elementos Goldbach del arreglo
+  Invocación a solver_print()
+end procedure
+
 procedure solver_print <solver>:
   Imprimir las Sumas de Goldbach para cada valor del arreglo
 end procedure
 
 procedure solver_destroy <solver>:
   Liberar memoria empleada por la estructura
-end procedure
-
-procedure create_threads <solver>:
-  Inicializar arreglo de hilos y estructura de datos privados
-  Crear los hilos y asignarles su trabajo a hacer
-  Hacer join a todos los hilos
-  Imprimir las Sumas de Goldbach
-  Liberar memoria utilizada por los hilos
-end procedure
-
-procedure join_threads <threads, thread_count>:
-  Hacer join a cada hilo del arreglo de hilos
-end procedure
-
-procedure calculate <data>:
-  Calcular las Sumas de Goldbach para cada valor del arreglo asignandose mediante mapeo dinámico
 end procedure

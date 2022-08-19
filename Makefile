@@ -7,7 +7,7 @@ DEFS=
 CSTD=-std=gnu11
 XSTD=-std=gnu++11
 FLAG=
-FLAGS=$(strip -Wall -Wextra -pthread $(FLAG) $(DEFS))
+FLAGS=$(strip -Wall -Wextra -pthread -fopenmp $(FLAG) $(DEFS))
 FLAGC=$(FLAGS) $(CSTD)
 FLAGX=$(FLAGS) $(XSTD)
 LIBS=

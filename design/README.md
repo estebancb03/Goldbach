@@ -61,7 +61,7 @@ Esta estructura se encarga del almacenamiento de elementos de tipo goldbach_t*. 
 typedef struct array_goldbach {
   uint32_t count;
   uint32_t capacity;
-  goldbach_t** elements;
+  goldbach_t``` elements;
 } array_goldbach_t;
 ```
 
@@ -73,18 +73,12 @@ Para recorrer cada archivo introducido y calcular las Sumas de Goldbach para tod
 
 ```C
 typedef struct solver {
-  uint32_t position;
   uint32_t thread_count;
   array_goldbach_t buffer;
-  pthread_mutex_t can_access_position;
 } solver_t
-
-typedef struct private_data {
-  solver_t* solver;
-} private_data_t;
 ```
 
-La estructura ```solver``` se encarga de almacenar los datos compartidos entre los diferentes hilos, posee los campos ```position``` que es la variable contadora para la reparticion de celdas del arreglo entre los hilos, ```thread_count``` que guarda la cantidad de hilos a crear para resolver las operaciones, ```buffer``` que almacena los objetos goldbach_t* correspondientes a cada valor y ```can_access_position``` que es un mutex que controla la lectura y modificación del campo position. El método constructor no requiere parámetros.
+La estructura ```solver``` se encarga de almacenar los datos compartidos entre los diferentes hilos, posee los campos ```thread_count``` que guarda la cantidad de hilos a crear para resolver las operaciones y ```buffer``` que almacena los objetos goldbach_t* correspondientes a cada valor. El método constructor no requiere parámetros.
 
 Por último, la estructura ```private_data``` contiene la información exclusiva para cada hilo, tiene como único campo un puntero que apunta a los datos compartidos que sería ```solver```.
 

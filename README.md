@@ -1,11 +1,11 @@
-# **Golbach Calculator**
+# **Goldbach Calculator**
 ## Descripción del problema
 
 Este programa se encarga de obtener las sumas de Goldbach de uno o varios valores dados que el usuario puede ingresar. El matemático Christian Goldbach propuso que todo número entero mayor que cinco se puede expresar como la suma de un conjunto de números primos. Esta propuesta se divide en dos conjeturas:
 
-* ```Conjetura fuerte:``` Todo número par se puede escribir como la suma de dos números primos. Ejemplo: 8 = 3 + 5.
+* ```Conjetura fuerte```: Todo número par se puede escribir como la suma de dos números primos. Ejemplo: 8 = 3 + 5.
   
-* ```Conjetura débil:``` Todo número impar se puede escribir como la suma de tres números primos. Ejemplo: 9 = 2 + 2 + 5.
+* ```Conjetura débil```: Todo número impar se puede escribir como la suma de tres números primos. Ejemplo: 9 = 2 + 2 + 5.
 
 ## Manual de uso
 
@@ -37,13 +37,13 @@ Existen dos formas de ejecutar el programa, la primera forma es insertando los d
 bin/Goldbach-Calculator
 ```
 
-Opcionalmente también se puede ingresar la cantidad de hilos deseados para resolver la ejecución del programa, en caso de no brindar ningún número se utilizará la máxima capacidad que el hardware pueda brindar. Para introducir la cantidad de hilos deseados siga el siguiente ejemplo donde se solicita utilizar diez hilos:
+Opcionalmente también se puede ingresar la cantidad de hilos y procesos deseados para resolver la ejecución del programa, en caso de no brindar ningún número se utilizará la máxima capacidad que el hardware pueda brindar. Para introducir la cantidad de hilos y procesos requeridos siga el siguiente ejemplo donde se solicita utilizar diez hilos:
 
 ```
 bin/Goldbach-Calculator 10
 ```
 
-Después de introducir el comando, se podrán digitar los datos y por cada dato introducido el programa brindará instantaneamente un resultado. Para indicarle al programa que ya no debe leer más datos presione ```ctrl + d```.
+Después de introducir el comando, se podrán digitar los datos y por cada dato introducido el programa brindará instantaneamente un resultado. Para indicarle al programa que ya no debe leer más datos presione ctrl + d.
 
 Si en cambio se desea evaluar algún archivo .txt que contengan los datos se le debe pasar la ruta del archivo a analizar. Ejemplo del comando a usar:
 
