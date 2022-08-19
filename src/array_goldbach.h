@@ -61,10 +61,10 @@ goldbach_t** array_goldbach_get_elements(array_goldbach_t* array);
 /**
  * @brief Retorna el campo count de la estructura
  * @code
- *   uint32_t array_count = array_goldbach_get_count(&array); 
+ *   uint64_t array_count = array_goldbach_get_count(&array); 
  * @endcode
  * @param array arreglo
- * @return uint32_t cantidad de elementos almacenaddos 
+ * @return uint64_t cantidad de elementos almacenaddos 
  */
 uint32_t array_goldbach_get_count(array_goldbach_t* array);
 

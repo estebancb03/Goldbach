@@ -60,10 +60,10 @@ char* array_char_get_elements(array_char_t* array);
 /**
  * @brief Retorna el campo count de la estructura
  * @code
- *   uint32_t array_count = array_char_get_count(&array); 
+ *   uint64_t array_count = array_char_get_count(&array); 
  * @endcode
  * @param array arreglo
- * @return uint32_t cantidad de elementos almacenaddos 
+ * @return uint64_t cantidad de elementos almacenaddos 
  */
 uint32_t array_char_get_count(array_char_t* array);
 

@@ -1,7 +1,0 @@
-procedure main:
-  definir variable solver y asignarle método solver_create
-  invocar solver_read
-  invocar solver_run
-  invocar solver_destroy
-  retornar 0 
-end procedure

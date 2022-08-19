@@ -16,20 +16,19 @@ typedef struct array_char {
 ```
 
 Esta estructura de datos cuenta con tres campos, en ```count``` se guarda la cantidad de elementos almacenados en la estructura mientras que ```capacity``` guarda la capacidad de elementos que pueden ser almacenados, si se diera la eventual situación de que se llena por completo la capacidad, esta puede ser ampleada. Por otra parte, el campo ```elements``` es un arreglo sencillo el cual guarda los elementos. En el constructor se recibe un objeto de tipo array_char_t cuyos campos estén sin inicializar.
-
 ## Array_uint32
 
-Esta estructura se encarga del almacenamiento de elementos de tipo uint32_t. Se plantea una estructura aparte dedicada para este fin en vez de un arreglo normal para manejar de mejor manera los errores de desbordamiento de memoria como buffer overflow. La estructura de datos se ve implementada en C de la siguiente forma:
+Esta estructura se encarga del almacenamiento de elementos de tipo uint64_t. Se plantea una estructura aparte dedicada para este fin en vez de un arreglo normal para manejar de mejor manera los errores de desbordamiento de memoria como buffer overflow. La estructura de datos se ve implementada en C de la siguiente forma:
 
 ```C
-typedef struct array_uint32 {
+typedef struct array_uint64 {
   uint32_t count;
   uint32_t capacity;
   uint32_t* elements;
-} array_uint32_t;
+} array_uint64_t;
 ```
 
-Esta estructura de datos cuenta con tres campos, en ```count``` se guarda la cantidad de elementos almacenados en la estructura mientras que ```capacity``` guarda la capacidad de elementos que pueden ser almacenados, si se diera la eventual situación de que se llena por completo la capacidad, esta puede ser ampleada. Por otra parte, el campo ```elements``` es un arreglo sencillo el cual guarda los elementos. En el constructor se recibe un objeto de tipo array_uint32_t cuyos campos estén sin inicializar.
+Esta estructura de datos cuenta con tres campos, en ```count``` se guarda la cantidad de elementos almacenados en la estructura mientras que ```capacity``` guarda la capacidad de elementos que pueden ser almacenados, si se diera la eventual situación de que se llena por completo la capacidad, esta puede ser ampleada. Por otra parte, el campo ```elements``` es un arreglo sencillo el cual guarda los elementos. En el constructor se recibe un objeto de tipo array_uint64_t cuyos campos estén sin inicializar.
 
 ## Goldbach
 
@@ -48,7 +47,7 @@ typedef struct goldbach {
 } goldbach_t;
 ```
 
-En el constructor de goldbach se recibirá unicamente una cadena de caracteres que se almacenará en el campo ```entry```. Después de pasar una serie de validaciones y asegurarse de que es una entrada válida, es decir, un número entero se procede a convertir la cadena en un entero de 32 bits sin signo el cual se almacena en el campo ```value```, en el caso de que el número sea negativo se convierte a positivo para fines de realizar los cálculos.
+En el constructor de goldbach se recibirá unicamente una cadena de caracteres que se almacenará en el campo ```entry```. Después de pasar una serie de validaciones y asegurarse de que es una entrada válida, es decir, un número entero se procede a convertir la cadena en un entero de 64 bits sin signo el cual se almacena en el campo ```value```, en el caso de que el número sea negativo se convierte a positivo para fines de realizar los cálculos.
 
 Al validar la entrada se obtienen los valores correspondientes a ```is_valid```, ```is_negative``` y ```is_even_number```. Es necesaria la existencia de estos campos principalmente porque dependiendo de sus valores se escribirá la salida de una forma u otra.
 
@@ -74,8 +73,17 @@ Para recorrer cada archivo introducido y calcular las Sumas de Goldbach para tod
 
 ```C
 typedef struct solver {
+  uint32_t thread_count;
   array_goldbach_t array;
 } solver_t
+
+typedef struct private_data {
+  uint32_t start;
+  uint32_t finish;
+  solver_t* solver;
+} private_data_t;
 ```
 
-La estructura posee unicamente un campo ```array``` que almacena los objetos goldbach_t* correspondientes a cada valor, esta se crea en el constructor. El método constructor no requiere parámetros.
+La estructura ```solver``` se encarga de almacenar los datos compartidos entre los diferentes hilos, posee los campos ```thread_count``` que guarda la cantidad de hilos a crear para resolver las operaciones y ```array``` que almacena los objetos goldbach_t* correspondientes a cada valor, esta se crea en el constructor. El método constructor no requiere parámetros.
+
+Por último, la estructura ```private_data``` contiene la información exclusiva para cada hilo, entre sus campos se encuentran ```start``` y ```finish``` que delimitan la región del arreglo en la que puede operar el hilo, tambien tiene un puntero que apunta a los datos compartidos que sería ```solver```.

@@ -110,10 +110,10 @@ bool validate_weak_sum(array_uint32_t sums, uint32_t number1, uint32_t number2,
  * @details Convierte la entrada que es char* a uint32_t si es un valor válido para que 
  *          pueda ser usado en posteriores calculos con mayor facilidad.
  * @code
- *   uiint32_t value = extract_value("-317");
+ *   uint32_t value = extract_value("-317");
  * @endcode
  * @param entry cadena de caracteres 
- * @return uint32_t contenido de la entrada convertido a entero positivo de 32 bits
+ * @return uint32_t contenido de la entrada convertido a entero positivo de 64 bits
  */
 uint32_t extract_value(char* entry);
 
@@ -235,14 +235,14 @@ void goldbach_print(goldbach_t* goldbach) {
   uint32_t* current_sums = array_uint32_get_elements(&goldbach -> sums);
   if (goldbach -> is_valid) {
     if (goldbach -> count != 0) {
-      printf("%" PRIu32 " SUMS", goldbach -> count);
+      printf("%" PRIu32 " sums", goldbach -> count);
       if (goldbach -> is_negative) {
         printf(": ");
         uint32_t count = array_uint32_get_count(&goldbach -> sums);
         if (goldbach -> is_even_number) {
           for (uint32_t index = 1; index < count; index += 2) {
-            printf("%" PRIu32 " + ", current_sums[index]);
-            printf("%" PRIu32, current_sums[index - 1]);
+            printf("%" PRIu32 " + ", current_sums[index - 1]);
+            printf("%" PRIu32, current_sums[index]);
             if (index + 1 != count)
               printf(", ");
           }
@@ -374,7 +374,7 @@ bool validate_weak_sum(array_uint32_t sums, uint32_t number1, uint32_t number2,
 }
 
 uint32_t extract_value(char* entry) {
-  // Convertir entry a entero de 32 bits positivo
+  // Convertir entry a entero de 64 bits positivo
   uint32_t value = (uint32_t) atoi(entry);
   if (validate_negative(entry))
     value *= -1;

@@ -4,7 +4,10 @@
 
 #ifndef SOLVER_H
 #define SOLVER_H
+#include <stdio.h>
 #include <assert.h>
+#include <unistd.h>
+#include <pthread.h>
 #include "goldbach.h"
 #include "array_goldbach.h"
 
@@ -29,31 +32,15 @@ typedef struct solver solver_t;
 solver_t* solver_create();
 
 /**
- * @brief Lee los valores introducidos en la entrada estandar
- * @code 
- *  solver_read(solver);
- * @endcode
- * @param solver estructura
- */
-void solver_read(solver_t* solver);
-
-/**
  * @brief Encuentra las soluciones para cada goldbach del arreglo de goldbach
  * @code 
- *  solver_run(solver);
+ *  solver_run(solver, argc, argv);
  * @endcode
  * @param solver estructura de datos
+ * @param argc
+ * @param argv
  */
-void solver_run(solver_t* solver);
-
-/**
- * @brief Imprime las soluciones para cada valor del archivo
- * @code 
- *  solver_print(solver);
- * @endcode
- * @param solver estructura
- */
-void solver_print(solver_t* solver);
+void solver_run(solver_t* solver, int argc, char* argv[]);
 
 /**
  * @brief Destructor, libera la memoria de las estructuras de datos empleadas
