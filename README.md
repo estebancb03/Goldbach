@@ -1,4 +1,4 @@
-# **Golbach Calculator**
+# **Goldbach Calculator**
 ## Descripción del problema
 
 Este programa se encarga de obtener las sumas de Goldbach de uno o varios valores dados que el usuario puede ingresar. El matemático Christian Goldbach propuso que todo número entero mayor que cinco se puede expresar como la suma de un conjunto de números primos. Esta propuesta se divide en dos conjeturas:
